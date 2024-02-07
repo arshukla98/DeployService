@@ -1,0 +1,6 @@
+domain: msys.io
+layout:
+- go.kubebuilder.io/v3
+projectName: deployservice
+repo: github.com/DeployService
+version: "3"
