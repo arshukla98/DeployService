@@ -1,0 +1,14 @@
+apiVersion: deploy.msys.io/v1
+kind: DeployService
+metadata:
+  name: example-kube1
+spec:
+  deploymentTemplate:
+    imageName: nginx:alpine
+    name: nginx
+    namespace: default
+    replicas: 3
+  serviceTemplate:
+    name: nginx-svc
+    type: NodePort
+    servicePort: 80
