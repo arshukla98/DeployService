@@ -1,0 +1,24 @@
+# permissions for end users to edit deployservices.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: deployservice-editor-role
+rules:
+- apiGroups:
+  - deploy.msys.io
+  resources:
+  - deployservices
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - deploy.msys.io
+  resources:
+  - deployservices/status
+  verbs:
+  - get

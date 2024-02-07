@@ -1,0 +1,20 @@
+# permissions for end users to view deployservices.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: deployservice-viewer-role
+rules:
+- apiGroups:
+  - deploy.msys.io
+  resources:
+  - deployservices
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - deploy.msys.io
+  resources:
+  - deployservices/status
+  verbs:
+  - get

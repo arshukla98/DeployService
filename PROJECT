@@ -3,4 +3,13 @@ layout:
 - go.kubebuilder.io/v3
 projectName: deployservice
 repo: github.com/DeployService
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  domain: msys.io
+  group: deploy
+  kind: DeployService
+  path: github.com/DeployService/api/v1
+  version: v1
 version: "3"

@@ -1,0 +1,6 @@
+apiVersion: deploy.msys.io/v1
+kind: DeployService
+metadata:
+  name: deployservice-sample
+spec:
+  # TODO(user): Add fields here
