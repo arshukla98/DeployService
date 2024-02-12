@@ -1,94 +1,71 @@
-# deployservice
-// TODO(user): Add simple overview of use/purpose
+# Kubernetes CRD and Custom Resource
 
-## Description
-// TODO(user): An in-depth paragraph about your project and overview of use
+In Kubernetes, you can think of a "Custom Resource" as a way to create your own special objects to manage things that are unique to your application. These special objects are like the standard things Kubernetes knows how to handle, like Pods and Services, but they are tailored to your specific needs.
 
-## Getting Started
-You’ll need a Kubernetes cluster to run against. You can use [KIND](https://sigs.k8s.io/kind) to get a local cluster for testing, or run against a remote cluster.
-**Note:** Your controller will automatically use the current context in your kubeconfig file (i.e. whatever cluster `kubectl cluster-info` shows).
+Imagine you're running a video game on Kubernetes, and you want to create a custom resource to represent a new type of in-game item. You can define the properties of this item, like its name, power, and special abilities, using something called a "Custom Resource Definition" (CRD).
 
-### Running on the cluster
-1. Install Instances of Custom Resources:
+To establish current environment, execute steps in main branch.
 
-```sh
-kubectl apply -f config/samples/
+# Current Environment
+
+- Go (1.18.5)
+- Kubectl (GitCommit : 1b4df30b3, Git Version: v1.27.0)
+- KubeBuilder (3.5.0)
+- Packages need to Install using apt such as make, build-essential
+- Linux/AMD64
+
+# Objective
+
+The purpose of this repo is to create the following custom resource as shown below by creating CRD.
+
+```
+apiVersion: deploy.msys.io/v1
+kind: DeployService
+metadata:
+  name: example-kube1
+spec:
+  deploymentTemplate:
+    imageName: nginx:alpine
+    name: nginx
+    namespace: default
+    replicas: 3
+  serviceTemplate:
+    name: nginx-svc
+    type: NodePort
+    servicePort: 80
 ```
 
-2. Build and push your image to the location specified by `IMG`:
-	
-```sh
-make docker-build docker-push IMG=<some-registry>/deployservice:tag
-```
-	
-3. Deploy the controller to the cluster with the image specified by `IMG`:
+The provided YAML code defines a custom resource named DeployService with the API version deploy.msys.io/v1. 
+Custom Resources (CRs) in Kubernetes allow you to define and use your own custom objects alongside the built-in Kubernetes objects.
 
-```sh
-make deploy IMG=<some-registry>/deployservice:tag
-```
+Let's break down the structure of this custom resource:
 
-### Uninstall CRDs
-To delete the CRDs from the cluster:
+- **apiVersion**: Specifies the API version for the custom resource. In this case, it's deploy.msys.io/v1.
 
-```sh
-make uninstall
-```
+- **kind**: Specifies the kind of the custom resource, which is DeployService.
 
-### Undeploy controller
-UnDeploy the controller to the cluster:
+- **metadata**: Contains metadata information for the custom resource, including its name. In this example, the name is set to example-kube1.
 
-```sh
-make undeploy
-```
+- **spec**: Contains the specification for the custom resource. It defines the desired state for the deployment and service associated with this custom resource.
 
-## Contributing
-// TODO(user): Add detailed information on how you would like others to contribute to this project
+- **deploymentTemplate**: Describes the template for a Kubernetes Deployment.
 
-### How it works
-This project aims to follow the Kubernetes [Operator pattern](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/)
+    - **imageName**: Specifies the Docker image to be used for the deployment. In this case, it's nginx:alpine.
 
-It uses [Controllers](https://kubernetes.io/docs/concepts/architecture/controller/) 
-which provides a reconcile function responsible for synchronizing resources untile the desired state is reached on the cluster 
+    - **name**: Specifies the name of the deployment, which is set to nginx.
 
-### Test It Out
-1. Install the CRDs into the cluster:
+    - **namespace**: Specifies the Kubernetes namespace where the deployment should be created. In this example, it's set to default.
 
-```sh
-make install
-```
+    - **replicas**: Specifies the number of replicas (pods) for the deployment. In this case, it's set to 3.
 
-2. Run your controller (this will run in the foreground, so switch to a new terminal if you want to leave it running):
+- **serviceTemplate**: Describes the template for a Kubernetes Service.
 
-```sh
-make run
-```
+    - **name**: Specifies the name of the service, which is set to nginx-svc.
 
-**NOTE:** You can also run this in one step by running: `make install run`
+    - **type**: Specifies the type of the service. In this case, it's set to NodePort, which exposes the service on each Node's IP at a static port.
 
-### Modifying the API definitions
-If you are editing the API definitions, generate the manifests such as CRs or CRDs using:
+    - **servicePort**: Specifies the port on which the service should listen. In this example, it's set to 80.
 
-```sh
-make manifests
-```
+In summary, this custom resource is defining a deployment of three replicas using the nginx:alpine Docker image and a NodePort service exposing port 80. This allows you to encapsulate and manage deployment and service configurations using a custom resource in Kubernetes.
 
-**NOTE:** Run `make --help` for more information on all potential `make` targets
-
-More information can be found via the [Kubebuilder Documentation](https://book.kubebuilder.io/introduction.html)
-
-## License
-
-Copyright 2024.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
+Note that this is a like an object such as objects in Java. To add behaviors and methods associated with the object i.e Custom Resource, we already created Custom controller in 'p2 branch'.
