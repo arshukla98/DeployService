@@ -14,6 +14,10 @@ To establish current environment, execute steps in main branch.
 - Packages need to Install using apt such as make, build-essential
 - Linux/AMD64
 
+# Demo Recording
+
+The demo is recorded in "CRD_Part1.mp4".
+
 # Objective
 
 The purpose of this repo is to create the following custom resource as shown below by creating CRD.
