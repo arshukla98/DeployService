@@ -2,6 +2,10 @@
 
 The repository contains a Kubernetes controller written in Go that manages custom resources of typeDeployService. The controller watches for changes to DeployService resources and takes corresponding actions to ensure the desired state is maintained.
 
+## Demo Recording
+
+The demo is recorded in "CRD_Part2.mp4".
+
 ## Main Code
 
 - **Import Statements**: The code imports various packages required for interacting with Kubernetes, such as flag for command-line arguments, os for handling operating system signals, k8s.io packages for Kubernetes client and API objects, and github.com for the custom clientset.
